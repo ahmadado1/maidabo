@@ -1,0 +1,57 @@
+// import { View,StyleSheet } from "react-native";
+
+
+// const ahmad = StyleSheet.create({
+// sapa:{
+//    height:30,
+//    width:70,
+//    borderWidth:2,
+//    padding:7,
+//    margin:5,
+// },
+// mark:{
+//     height: 40,
+//     width:250,
+//     margin: 12,
+//     borderWidth: 2,
+//     padding: 10,
+//     marginTop:25,
+// },
+// cash:{
+//     height:100,
+//     width:250,
+//     margin: 12,
+//     borderWidth: 1,
+//     padding: 10,
+//     marginTop:25,
+// },
+// tag:{
+//     height: 40,
+//     width:250,
+//     margin: 12,
+//     borderWidth: 2,
+//     padding: 10,
+//     marginTop:25,
+// }
+// })
+// export {ahmad};
+
+// const spur = StyleSheet.create({
+// name:{
+//     height:40,
+//     width:250,
+//     margin: 12,
+//     borderWidth: 2,
+//     padding: 10,
+//     marginTop:25,
+// },
+// email:{
+//     height:40,
+//     width:250,
+//     margin: 12,
+//     borderWidth: 2,
+//     padding: 10,
+//     marginTop:25,
+// }
+// })
+// export {spur};

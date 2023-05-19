@@ -1,0 +1,174 @@
+// import { StatusBar } from 'expo-status-bar';
+// import { ScrollView,StyleSheet, Text, View, TextInput, SafeAreaView,ImageBackground, } from 'react-native';
+// import { Button,Alert,Image } from 'react-native';
+// import { ahmad } from './styles/styles';
+// import { spur } from './styles/styles';
+// import { TextInput } from 'react-native-paper';
+
+
+// export default function App() {
+//   return (
+//     <SafeAreaView>
+//    <ScrollView>
+   
+//     <ImageBackground source={require('./assets/image/swift.jpg')} style={styles.count}>
+//     <View style={styles.container}>
+    
+//       <View style={styles.call}>
+//         <Image source={require('./assets/menu.png')}
+//       alt='app logo'
+//       style={styles.imag}/>
+//       <Text style={styles.title}>Maidabo Foundation</Text>
+//       <StatusBar style="auto" />
+      
+//       </View>
+
+
+//       <View>
+      
+//         <Text style={styles.tech}>Welcome to maidabo foundation</Text>
+//       </View>
+      
+//         <Text>Enter the following credential to Register</Text>
+
+//         <Text style={styles.text}>Enter your Full Name</Text>
+//         <TextInput
+        
+//         style={ahmad.mark} 
+//         placeholder="Type your name"
+//         keyboardType="name"
+//         maxLength={30}
+        
+//         />
+//         <Text>Enter your date of birth in this format -dy/mm/yy</Text>
+//         <View style={styles.fixToText}>
+//         <TextInput
+//         style={ahmad.sapa}
+//         placeholder='ddyy'
+//         keyboardType='numeric'
+//         />
+//         <TextInput
+//         style={ahmad.sapa}
+//         placeholder='mm'
+//         keyboardType='numeric'
+//         />
+//         <TextInput
+//         style={ahmad.sapa}
+//         placeholder='yy'
+//         keyboardType='numeric'
+//         />
+        
+       
+//       </View>
+        
+        
+//         <Text>Enter your phone number</Text>
+//          <TextInput
+//         style={spur.name}
+//         placeholder='xxxxxxxxxxx'
+//         keyboardType='phone-pad'
+//         maxLength={11}
+        
+//         />
+//         <Text>Enter your email address if valid</Text>
+//          <TextInput
+//          style={spur.email}
+//         placeholder='example@gmail.com'
+//         keyboardType='email-address'
+//         />
+//         <Text>Enter your home address</Text>
+//          <TextInput
+//          style={ahmad.cash}
+//         placeholder='Address'
+//         keyboardType='text'
+//         multiline={true}
+//         />
+//         <Text>Enter your Local Government Area</Text>
+//          <TextInput
+//          style={ahmad.tag}
+//         placeholder='LGA'
+//         keyboardType='text'
+        
+//         />
+        
+        
+//         <View style={styles.button}>
+//      <Button title='Register'
+//      onPress={() => Alert.alert('Successfuly Registered')}/>
+//      </View>
+//     </View>
+    
+//     </ImageBackground>
+//     </ScrollView>
+//     </SafeAreaView>
+    
+//   )
+// }
+
+// const styles = StyleSheet.create({
+//   fixToText:{
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//   },
+//   call:{
+//     flexDirection:'row',
+//     justifyContent:'space-around',
+//     backgroundColor:'white',
+//   },
+//   imag:{
+//     width:35,
+//     height:35,
+//   },
+//   text:{
+//     marginTop:20,
+//   },
+//   random:{
+//     marginTop:20,
+
+//   },
+//   count:{
+//     flex:1,
+
+//   },
+//   container: {
+//     flex: 1,
+//     padding:0,
+//     marginBottom:50,
+//   },
+//   title:{
+//   textAlign:'left',
+//  fontSize:30,
+//  alignItems:'center',
+//  color:'black',
+//  marginRight:45,
+//  //borderWidth:3,
+//  //borderColor:'red',
+//  margin:0,
+//  padding:0,
+//  fontWeight:'bold',
+ 
+//   },
+//   tech:{
+//     padding:4,
+//     borderBottomColor:`#add8e6`,
+//     borderBottomWidth:StyleSheet.hairlineWidth,
+//     marginTop:20,
+//     fontSize:20,
+//     fontWeight:'bold',
+    
+//      },
+//   mass:{
+//     height: 40,
+//         width:250,
+//     margin: 12,
+//     borderWidth: 2,
+//     padding: 10,
+//     marginTop:25,
+    
+   
+//   },
+//   button:{
+//     textAlign:'center',
+//     marginVertical:8
+//   }
+// })

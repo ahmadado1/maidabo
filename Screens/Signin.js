@@ -2,8 +2,13 @@ import { View,TouchableOpacity,Text,StyleSheet,} from "react-native";
 import { SafeArea } from "./Safearea";
 import { TextInput,Button } from "react-native-paper";
 import { useState } from "react";
+import { Formik } from "formik";
+import * as yup from 'yup';
 
-
+const valRulse = yup.object({
+    email:yup.string().required().min(5).max(26),
+    password:yup.string().required().min(7).max(26)
+})
 
 
 export function Signin ({navigation}) {
@@ -14,23 +19,54 @@ export function Signin ({navigation}) {
             <Text style={styles.title}>Maidabo Foundation</Text>
             <Text style={styles.text}>Login to your Maidabo account</Text>
         <View style={styles.input}>
-         <TextInput
-            label="Email"
-            value={text}
-            onChangeText={text => setText(text)}
-            
-            />
-         <TextInput
-            label="Password"
-            value={number}
-            onChangeText={number => setNumber(number)}
-            style={styles.textinput}
-            secureTextEntry={true}
-            />
-            <View style={styles.button}>
-            <Button  mode="contained" onPress={() => console.log('Pressed')}>
-                Login
-            </Button></View>
+        <Formik
+                        initialValues={{ email:'',password:'' }}
+                        onSubmit={(values,action) => {
+                          console.log(values.email)
+                        }}
+                        validationSchema={valRulse}
+                      >
+                          {({ handleChange, handleBlur, handleSubmit, values,errors,touched }) => (
+                            <View>
+                              <View>
+                                <TextInput
+                                  mode="outlined"
+                                  label='Email'
+                                  style={styles.input}
+                                  onChangeText={handleChange('email')}
+                                            onBlur={handleBlur('email')}
+                                    value={values.email}
+                                />
+                                {touched.email && errors.email
+                                ? <Text style={{color:'red'}}>{errors.email}</Text> 
+                                : null}
+                                </View>
+
+                                <View>
+                                <TextInput
+                                    mode="outlined"
+                                    label='Password'
+                                    style={styles.input2}
+                                    onChangeText={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                    value={values.password}
+                                    />
+                                    {touched.password && errors.password
+                                        ? <Text style={{color:'red'}}>{errors.password}</Text> 
+                                        : null}
+                                    </View>
+
+             
+
+                                    
+                                    <Button 
+                                    mode="contained"
+                                    onPress={handleSubmit}
+                                    contentStyle={{paddingVertical:6}}
+                                    style={{marginVertical:12}}>Register</Button>
+                                    </View>
+                                )}
+                        </Formik>
         </View>
         <View style={styles.account}>
                           <Text >Don't have an account? </Text>

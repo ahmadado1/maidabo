@@ -7,14 +7,14 @@ const ahmad = StyleSheet.create({
     width:250,
     margin: 12,
     borderWidth: 2,
-    padding: 10,
+    padding: 7,
     marginTop:30,
   },
   nav:{
     borderWidth:1,
     borderRadius:10,
     padding:40,
-    margin:5,
+    margin:15,
     flexDirection:'column',
     
   },

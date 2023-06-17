@@ -1,24 +1,22 @@
-import { View,TouchableOpacity,Text,StyleSheet,} from "react-native";
+import { View,TouchableOpacity,Text,StyleSheet,Alert} from "react-native";
 import { TextInput,Button } from "react-native-paper";
 import { SafeArea } from "./Safearea";
-import { useState } from "react";
+import { useContext } from "react";
+import { AppContext }from "../variante/Global"
 import { Formik } from "formik";
 import * as yup from 'yup';
+import { auth} from "../variante/FireBase.setting";
+import { createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth"
 
 const validFields = yup.object({
-    fullName:yup.string().required('this field is required').min(5).max(36),
-    homeAddress:yup.string().required('type your home address').min(10).max(50),
     email:yup.string().required().min(5).max(26),
     password:yup.string().required().min(7).max(25)
     // .oneOf([yup.ref('passwordConfirmation'),null],)
 })
 
 export function Signup({navigation}) {
-    const [text, setText] = useState("");
-    const [number, setNumber] = useState("");
-    const [time, setTime] = useState("");
-    const [name, setName] = useState("");
-    const [icon, setIcon] = useState("");
+    const {setUid} = useContext(AppContext);
+  
     return(
         <SafeArea>
             <View style={styles.wrapper}>
@@ -26,79 +24,77 @@ export function Signup({navigation}) {
                 <Text style={styles.text}>Please input all credencials to register</Text>
                 <View style={styles.input}>
                 <Formik
-                        initialValues={{ fullName: '',homeAddress:'',email:'',password:'' }}
-                        onSubmit={(values,action) => {
-                          console.log(values.email)
-                        }}
-                        validationSchema={validFields}
-                      >
-                          {({ handleChange, handleBlur, handleSubmit, values,errors,touched }) => (
+                      initialValues={{email: '',password:''}}
+                      onSubmit={(values,action) => {
+                        createUserWithEmailAndPassword(auth,values.email,values.password)
+                        .then(() => onAuthStateChanged(auth,(user) => {
+                          setUid(user.uid);
+                           navigation.navigate('My Home')
+                        }))
+                        .catch((error) => {
+                          //custom action for defferent errors
+                          if (error.code == 'auth/invalid-email'){
+                            Alert.alert('Message','Invalid email! ',[
+                              {text:'Try again',},
+                            ])
+                          }else if (error.code == 'auth/email-already-in-use'){
+                            Alert.alert('Message','Account allready exist with the same email',[
+                              {text:'Go to Login',onPress:() => navigation.navigate('Signin')},
+                              {text:'Forgot Password',onPress:() => navigation.navigate('ForgotPassword')}
+                            ])
+                          }else{
+                            Alert.alert('Message','Something went wrong ',[
+                              {text:'Try again',},
+                            ])
+                          }
+                        }) 
+                      }}
+                      validationSchema={validFields}
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values,errors,touched }) => (
+                          <View>
                             <View>
-                              <View>
-                                <TextInput
-                                  mode="outlined"
-                                  label='Full Name'
-                                  style={styles.input}
-                                  onChangeText={handleChange('fullName')}
-                                            onBlur={handleBlur('fullName')}
-                                    value={values.fullName}
-                                />
-                                {touched.fullName && errors.fullName
-                                ? <Text style={{color:'red'}}>{errors.email}</Text> 
-                                : null}
-                                </View>
-
-                                <View>
-                                <TextInput
-                                    mode="outlined"
-                                    label='Home Address'
-                                    style={styles.input2}
-                                    onChangeText={handleChange('homeAddress')}
-                                    onBlur={handleBlur('homeAddress')}
-                                    value={values.homeAddress}
-                                    />
-                                    {touched.homeAddress && errors.homeAddress
-                                        ? <Text style={{color:'red'}}>{errors.homeAddress}</Text> 
-                                        : null}
-                                    </View>
-
-                                    <View>
-                                    <TextInput
-                                        mode="outlined"
-                                        label='Email'
-                                        style={styles.input3}
-                                        onChangeText={handleChange('email')}
-                                        onBlur={handleBlur('email')}
-                                        value={values.email}
-                                    />
-                                    {touched.email && errors.email
-                                        ? <Text style={{color:'red'}}>{errors.email}</Text> 
-                                        : null}
-                                    </View>
-
-                                    <View>
-                                    <TextInput
-                                        mode="outlined"
-                                        label='password'
-                                        style={styles.input4}
-                                        onChangeText={handleChange('password')}
-                                        onBlur={handleBlur('password')}
-                                        value={values.password}
-                                        secureTextEntry={true}
-                                    />
-                                    {touched.password && errors.password
-                                        ? <Text style={{color:'red'}}>{errors.password}</Text> 
-                                        : null}
-                                    </View>
-                                    
-                                    <Button 
-                                    mode="contained"
-                                    onPress={handleSubmit}
-                                    contentStyle={{paddingVertical:6}}
-                                    style={{marginVertical:12}}>Register</Button>
-                                    </View>
-                                )}
-                        </Formik>
+                            <TextInput
+                              outlineColor="black"
+                              activeOutlineColor="black"
+                              mode="outlined"
+                              label='email'
+                              style={styles.input}
+                              onChangeText={handleChange('email')}
+                              onBlur={handleBlur('email')}
+                              value={values.email}
+                            />
+                            {touched.email && errors.email
+                              ? <Text style={{color:'red'}}>{errors.email}</Text> 
+                              : null}
+                            </View>
+                            <View>
+                            <TextInput
+                              outlineColor="black"
+                              activeOutlineColor="black"
+                              mode="outlined"
+                              label='Password'
+                              style={styles.input}
+                              onChangeText={handleChange('password')}
+                              onBlur={handleBlur('password')}
+                              value={values.password}
+                              secureTextEntry={true}
+                            />
+                            {touched.password && errors.password
+                              ? <Text style={{color:'red'}}>{errors.password}</Text> 
+                              : null}
+                            </View>
+                            
+                          
+                            <Button
+                            buttonColor="black"
+                            mode="contained"
+                            onPress={handleSubmit}
+                            contentStyle={{paddingVertical:6}}
+                            style={{marginVertical:12}}>Create account</Button>
+                          </View>
+                        )}
+                      </Formik>
                 
                 </View>
                 <View style={styles.account}>
@@ -112,7 +108,11 @@ export function Signup({navigation}) {
         </SafeArea>
     )
 }
-
+//  <Button 
+//                                     mode="contained"
+//                                     onPress={handleSubmit}
+//                                     contentStyle={{paddingVertical:6}}
+//                                     style={{marginVertical:12}}>Register</Button>
 const styles = StyleSheet.create({
     title:{
         fontSize:25,
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
         //justifyContent:'center',
+        marginTop:30,
         marginBottom:280
     },
     text:{

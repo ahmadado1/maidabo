@@ -23,17 +23,20 @@ function Home ({navigation}) {
         style={style.rewers}/> */}
       
   return (
-  <SafeArea>
-    <View style={style.color}>
-    <View style={style.counter}>
-      
+    <><View style={style.counter}>
       <View style={style.container}>
       
         <Text style={style.title}>Maidabo</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text style={style.texted}>Sign Up</Text></TouchableOpacity>
       </View>
+    
+      
     </View >
+    
+  <SafeArea>
+    <View style={style.color}>
+    
     <View style={style.flex}>
 
       <View style={style.boxes}>
@@ -70,7 +73,7 @@ function Home ({navigation}) {
       </View></TouchableOpacity>
      
       </View></View>
-      </SafeArea>
+      </SafeArea></>
   );
 }
 
@@ -98,7 +101,7 @@ export function MyHome(){
               >
             <Tab.Screen name="Home" component={Home} options={{headerShown:false}}/>
          
-          <Tab.Screen name="About" component={About} options={{headerShown:true}}/>
+          <Tab.Screen name="About" component={About} options={{headerShown:false}}/>
       </Tab.Navigator>
   )
 }
@@ -141,6 +144,7 @@ const style = StyleSheet.create({
       fontSize:20
   },
   container:{
+    marginTop:35,
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
